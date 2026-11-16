@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Mamun Secure Browser</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#14182b;--mu:#667;--ac:#6c5ce7;--ac2:#00cec9;--bd:#e3e6f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1020;--card:#171b31;--tx:#eef0ff;--mu:#9aa0c3;--bd:#272c4a}}
+:root[data-theme="dark"]{--bg:#0d1020;--card:#171b31;--tx:#eef0ff;--mu:#9aa0c3;--bd:#272c4a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:system-ui,-apple-system,"Noto Sans Bengali","Segoe UI",sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:-30% -20% auto;height:70vh;background:radial-gradient(circle at 30% 40%,var(--ac) 0,transparent 45%),radial-gradient(circle at 70% 30%,var(--ac2) 0,transparent 40%);opacity:.18;filter:blur(40px);animation:float 12s ease-in-out infinite alternate;z-index:-1}
+@keyframes float{to{transform:translate(4%,6%) scale(1.1)}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{box-shadow:0 0 0 8px transparent}}
+.wrap{max-width:980px;margin:0 auto;padding:14px}
+header{display:flex;align-items:center;gap:10px;flex-wrap:wrap;animation:up .5s both}
+.logo{width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--ac),var(--ac2));display:grid;place-items:center;color:#fff;font-weight:800;font-size:20px;box-shadow:0 0 0 0 var(--ac);animation:pulse 2.4s infinite}
+h1{font-size:18px;margin:0}
+.badge{font-size:11px;color:#0a8f5c;background:#0a8f5c1f;padding:3px 8px;border-radius:99px}
+.sp{flex:1}
+.bar{display:flex;gap:8px;margin:14px 0;animation:up .6s both}
+.bar input{flex:1;min-width:0;padding:13px 16px;border-radius:14px;border:1px solid var(--bd);background:var(--card);color:var(--tx);font-size:15px;outline:none}
+.bar input:focus{border-color:var(--ac);box-shadow:0 0 0 3px #6c5ce733}
+button{font:inherit;cursor:pointer;border:0;border-radius:12px;padding:10px 14px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;transition:transform .15s,opacity .15s}
+button:hover{transform:translateY(-2px)}button:active{transform:scale(.96)}
+button.g{background:var(--card);color:var(--tx);border:1px solid var(--bd)}
+button.r{background:#e5484d}
+nav{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+nav button{white-space:nowrap}nav button.on{background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin-top:14px}
+.tile{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;text-align:left;color:var(--tx);animation:up .5s both;display:block}
+.tile:hover{border-color:var(--ac);box-shadow:0 10px 30px #6c5ce722}
+.tile i{font-style:normal;font-size:26px;display:block;margin-bottom:8px}
+.tile b{display:block;font-size:14px}.tile small{color:var(--mu);font-size:12px}
+.panel{background:var(--card);border:1px solid var(--bd);border-radius:18px;padding:16px;margin-top:14px;animation:up .4s both}
+.panel h2{margin:0 0 8px;font-size:16px}.panel p{color:var(--mu);font-size:13px;line-height:1.6;margin:6px 0}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:8px 0}
+.row input[type=text]{flex:1;min-width:140px;padding:10px;border-radius:10px;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.sw{display:flex;align-items:center;gap:8px;font-size:14px;padding:6px 0}
+.mail{display:flex;gap:10px;padding:10px;border-radius:12px;border:1px solid var(--bd);margin:8px 0;cursor:pointer;animation:up .4s both}
+.mail:hover{border-color:var(--ac)}.mail b{font-size:13px}.mail span{color:var(--mu);font-size:12px;display:block}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--ac2);margin-top:5px;flex:none}
+.list li{display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd);font-size:13px;word-break:break-all}
+.list{list-style:none;padding:0;margin:0}
+.hide{display:none}
+footer{text-align:center;margin:26px 0 12px;color:var(--mu);font-size:13px}
+footer a{color:var(--ac);font-weight:700;text-decoration:none}
+#toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--tx);color:var(--bg);padding:10px 16px;border-radius:99px;font-size:13px;opacity:0;transition:.3s;pointer-events:none}
+#toast.s{opacity:1;transform:translate(-50%,0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="logo">M</div>
+  <div><h1>Mamun Secure Browser</h1><span class="badge">🔒 DuckDuckGo · Private</span></div>
+  <div class="sp"></div>
+  <button class="g" id="dm">🖥 Desktop: বন্ধ</button>
+</header>
+
+<div class="bar">
+  <input id="q" placeholder="DuckDuckGo-তে সার্চ করুন বা URL লিখুন…" autocomplete="off">
+  <button id="go">যান</button>
+</div>
+
+<nav id="nav">
+  <button data-t="home" class="on">🏠 হোম</button>
+  <button data-t="mail" class="g">✉️ মেইল</button>
+  <button data-t="sheets" class="g">📊 শিট</button>
+  <button data-t="saved" class="g">💾 সংরক্ষিত</button>
+  <button data-t="set" class="g">⚙️ সেটিংস</button>
+</nav>
+
+<section id="home">
+  <div class="grid" id="tiles"></div>
+</section>
+
+<section id="mail" class="hide">
+  <div class="panel">
+    <h2>Gmail নোটিফিকেশন</h2>
+    <p>এখানে Gmail অ্যাকাউন্টে লগইন করলে নতুন মেইল এলে নোটিফিকেশন আসবে এবং ক্লিক করলে মেইল খুলবে। (ডেমো মেইল নিচে দেখুন)</p>
+    <div class="row">
+      <button id="gl">Gmail লগইন (Google OAuth)</button>
+      <button class="g" id="nt">🔔 নোটিফিকেশন চালু</button>
+      <button class="g" id="ddg">DuckDuckGo Mail খুলুন</button>
+    </div>
+    <div id="inbox"></div>
+  </div>
+</section>
+
+<section id="sheets" class="hide">
+  <div class="panel">
+    <h2>Google Sheets</h2>
+    <p>Sheet ID বা লিংক দিয়ে সংরক্ষণ করুন, পরে এক ক্লিকে খুলুন।</p>
+    <div class="row"><input type="text" id="sn" placeholder="নাম (যেমন: হিসাব)"><input type="text" id="su" placeholder="Sheet লিংক"><button id="sa">যোগ</button></div>
+    <ul class="list" id="sl"></ul>
+  </div>
+</section>
+
+<section id="saved" class="hide">
+  <div class="panel"><h2>বুকমার্ক</h2>
+    <div class="row"><input type="text" id="bn" placeholder="নাম"><input type="text" id="bu" placeholder="https://…"><button id="ba">সেভ</button></div>
+    <ul class="list" id="bl"></ul></div>
+  <div class="panel"><h2>হিস্ট্রি</h2><ul class="list" id="hl"></ul></div>
+</section>
+
+<section id="set" class="hide">
+  <div class="panel"><h2>সেটিংস ও নিরাপত্তা</h2>
+    <label class="sw"><input type="checkbox" id="ck" checked> কুকিজ ও ডাটা সংরক্ষণ করুন</label>
+    <label class="sw"><input type="checkbox" id="th"> ডার্ক থিম</label>
+    <p>সব ডাটা শুধু আপনার ডিভাইসে থাকে, কোনো সার্ভারে যায় না।</p>
+    <div class="row"><button class="r" id="clr">🗑 সব ডাটা ক্লিয়ার করুন</button></div>
+  </div>
+</section>
+
+<footer>Credit by <a href="https://www.facebook.com/rtmamun11" target="_blank" rel="noopener noreferrer">মামুন</a></footer>
+</div>
+<div id="toast"></div>
+
+<script>
+var $=function(s){return document.querySelector(s)};
+var P='msb_';
+function ld(k,d){try{var v=localStorage.getItem(P+k);return v?JSON.parse(v):d}catch(e){return d}}
+function sv(k,v){try{if(ld('ck',true))localStorage.setItem(P+k,JSON.stringify(v))}catch(e){}}
+function toast(m){var t=$('#toast');t.textContent=m;t.className='s';setTimeout(function(){t.className=''},2200)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function safe(u){return /^https:\/\//i.test(u)}
+
+var apps=[
+ ['🔎','DuckDuckGo','প্রাইভেট সার্চ','https://duckduckgo.com/'],
+ ['✉️','DDG Mail','duck.com ইমেইল','https://duckduckgo.com/email/'],
+ ['📬','Gmail','ইনবক্স','https://mail.google.com/'],
+ ['📊','Google Sheets','স্প্রেডশিট','https://docs.google.com/spreadsheets/'],
+ ['✅','GitHub Check','চেকার','https://almamun157484.github.io/github-checker/'],
+ ['⭐','Multi Star','মাল্টি স্টার','https://almamun157484.github.io/multi-star-tool/'],
+ ['🔑','Token Generator','Git টোকেন','https://github-token-generator-uxtm.vercel.app/'],
+ ['🐙','Git Login','GitHub লগইন','https://github.com/login'],
+ ['🆕','Git Sign up','GitHub সাইন আপ','https://github.com/signup']
+];
+var T=$('#tiles');
+apps.forEach(function(a,i){var b=document.createElement('a');b.className='tile';b.href=a[3];b.target='_blank';b.rel='noopener noreferrer';b.style.animationDelay=(i*60)+'ms';
+ b.innerHTML='<i>'+a[0]+'</i><b>'+a[1]+'</b><small>'+a[2]+'</small>';
+ b.onclick=function(){hist(a[1],a[3])};T.appendChild(b)});
+
+function open_(u){
+ if(!safe(u)){toast('শুধু https লিংক অনুমোদিত');return}
+ hist(u,u);window.open(u,'_blank','noopener,noreferrer')}
+$('#go').onclick=function(){var v=$('#q').value.trim();if(!v)return;
+ var u=/^[\w-]+(\.[\w-]+)+(\/.*)?$/.test(v)?'https://'+v:/^https:\/\//i.test(v)?v:'https://duckduckgo.com/?q='+encodeURIComponent(v)+($('#dm').dataset.on?'&kd=1':'');
+ open_(u)};
+$('#q').onkeydown=function(e){if(e.key==='Enter')$('#go').click()};
+
+/* tabs */
+var secs=['home','mail','sheets','saved','set'];
+$('#nav').onclick=function(e){var t=e.target.dataset&&e.target.dataset.t;if(!t)return;
+ secs.forEach(function(s){$('#'+s).classList.toggle('hide',s!==t)});
+ [].forEach.call(document.querySelectorAll('#nav button'),function(b){b.className=b.dataset.t===t?'on':'g'})};
+
+/* desktop mode */
+function dm(){var on=ld('dm',false);$('#dm').dataset.on=on?'1':'';$('#dm').textContent='🖥 Desktop: '+(on?'চালু':'বন্ধ')}
+$('#dm').onclick=function(){sv('dm',!ld('dm',false));dm();toast('ডেস্কটপ মোড পরিবর্তিত')};dm();
+
+/* history */
+function hist(n,u){var h=ld('h',[]);h.unshift({n:n,u:u,t:Date.now()});sv('h',h.slice(0,30));rh()}
+function rh(){var h=ld('h',[]);$('#hl').innerHTML=h.length?h.map(function(x){return'<li><span>'+esc(x.n)+'</span><small>'+new Date(x.t).toLocaleTimeString()+'</small></li>'}).join(''):'<li>খালি</li>'}
+
+/* generic saved lists */
+function lst(key,el,nEl,uEl,addB){
+ function r(){var a=ld(key,[]);$(el).innerHTML=a.length?a.map(function(x,i){return'<li><a href="#" data-o="'+i+'">'+esc(x.n)+'</a><button class="g" data-d="'+i+'">✕</button></li>'}).join(''):'<li>কিছু নেই</li>'}
+ $(addB).onclick=function(){var n=$(nEl).value.trim(),u=$(uEl).value.trim();if(!n||!safe(u)){toast('নাম ও https লিংক দিন');return}
+  var a=ld(key,[]);a.push({n:n,u:u});sv(key,a);$(nEl).value=$(uEl).value='';r();toast('সেভ হয়েছে')};
+ $(el).onclick=function(e){var t=e.target,a=ld(key,[]);
+  if(t.dataset.o!==undefined){e.preventDefault();open_(a[+t.dataset.o].u)}
+  if(t.dataset.d!==undefined){a.splice(+t.dataset.d,1);sv(key,a);r()}};r()}
+lst('b','#bl','#bn','#bu','#ba');lst('s','#sl','#sn','#su','#sa');rh();
+
+/* demo inbox */
+var demo=[['GitHub','আপনার নতুন লগইন ডিভাইস','https://mail.google.com/'],['DuckDuckGo','Email Protection সক্রিয়','https://duckduckgo.com/email/'],['Google Sheets','হিসাব শিট শেয়ার হয়েছে','https://docs.google.com/spreadsheets/']];
+$('#inbox').innerHTML=demo.map(function(m,i){return'<div class="mail" data-u="'+m[2]+'" style="animation-delay:'+i*90+'ms"><div class="dot"></div><div><b>'+m[0]+'</b><span>'+m[1]+'</span></div></div>'}).join('');
+$('#inbox').onclick=function(e){var m=e.target.closest('.mail');if(m)open_(m.dataset.u)};
+$('#gl').onclick=function(){toast('ডেমো: আসল লগইনের জন্য Google Client ID লাগবে')};
+$('#ddg').onclick=function(){open_('https://duckduckgo.com/email/')};
+$('#nt').onclick=function(){
+ if(!('Notification' in window)){toast('এই ব্রাউজারে সমর্থিত নয়');return}
+ Notification.requestPermission().then(function(p){toast(p==='granted'?'নোটিফিকেশন চালু ✓':'অনুমতি দেওয়া হয়নি');
+  if(p==='granted')try{new Notification('Mamun Browser',{body:'নতুন মেইল এসেছে (ডেমো)'})}catch(e){}})};
+
+/* settings */
+$('#ck').checked=ld('ck',true);
+$('#ck').onchange=function(){try{localStorage.setItem(P+'ck',JSON.stringify($('#ck').checked))}catch(e){}toast($('#ck').checked?'সংরক্ষণ চালু':'সংরক্ষণ বন্ধ')};
+function th(){var d=ld('th',false);$('#th').checked=d;document.documentElement.dataset.theme=d?'dark':'light'}
+$('#th').onchange=function(){sv('th',$('#th').checked);th()};th();
+$('#clr').onclick=function(){if(!confirm('সব সংরক্ষিত ডাটা মুছে যাবে। নিশ্চিত?'))return;
+ try{Object.keys(localStorage).filter(function(k){return k.indexOf(P)===0}).forEach(function(k){localStorage.removeItem(k)});sessionStorage.clear()}catch(e){}
+ lst('b','#bl','#bn','#bu','#ba');rh();toast('সব ডাটা ক্লিয়ার হয়েছে');setTimeout(function(){location.reload()},700)};
+</script>
+</body>
+</html>
